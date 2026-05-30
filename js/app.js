@@ -7,7 +7,7 @@ const APP_VERSION = 'v1 · 2026-05-29';
 // =====================================================
 // CONFIG — reemplazar con tus credenciales de Supabase
 // =====================================================
-const SUPABASE_URL      = 'https://zjuifkhahvbsncwnfhrv.supabase.co';
+const SUPABASE_URL      = 'https://zjuifhkahvbsncwnfhrv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqdWlmaGthaHZic25jd25maHJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NDc0MjQsImV4cCI6MjA5NTMyMzQyNH0.ishprRCCEcrjsVRuOZ3-M17qW2s0LnRM29EuuWJApXM';
 const ADMIN_PASSWORD   = '2468';
 
