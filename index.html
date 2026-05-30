@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#af9e78">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Remitos">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+
+  <title>RemitosApp Agus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          // Cuando se detecta un SW nuevo instalándose
+          reg.addEventListener('updatefound', () => {
+            const nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener('statechange', () => {
+              // Está instalado Y hay un controller actual → es una ACTUALIZACIÓN (no primera instalación)
+              if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+                showUpdateBanner(nw);
+              }
+            });
+          });
+          // Chequear actualizaciones cada 60s mientras la app está abierta
+          setInterval(() => reg.update().catch(() => {}), 60000);
+        }).catch(err => console.warn('SW error:', err));
+
+        // Cuando el nuevo SW toma control → recargar para usar el código fresco
+        let reloading = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (reloading) return;
+          reloading = true;
+          window.location.reload();
+        });
+      });
+    }
+
+    function showUpdateBanner(worker) {
+      if (document.getElementById('update-banner')) return; // ya hay uno
+      const el = document.createElement('div');
+      el.id = 'update-banner';
+      el.className = 'update-banner';
+      el.innerHTML = `
+        <span class="update-msg">✨ Nueva versión disponible</span>
+        <button class="update-btn" id="update-btn">Actualizar</button>
+      `;
+      document.body.appendChild(el);
+      requestAnimationFrame(() => el.classList.add('show'));
+      document.getElementById('update-btn').addEventListener('click', () => {
+        document.getElementById('update-btn').textContent = 'Actualizando...';
+        worker.postMessage({ type: 'SKIP_WAITING' });
+      });
+    }
+  </script>
+</body>
+</html>

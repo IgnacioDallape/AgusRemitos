@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo redondeado -->
+  <rect width="512" height="512" rx="96" fill="#af9e78"/>
+  <!-- Trailer -->
+  <rect x="58" y="178" width="232" height="152" rx="16" fill="white"/>
+  <!-- Líneas trailer -->
+  <rect x="58" y="218" width="232" height="6" rx="3" fill="#e8d6ae"/>
+  <rect x="58" y="258" width="232" height="6" rx="3" fill="#e8d6ae"/>
+  <rect x="58" y="298" width="232" height="6" rx="3" fill="#e8d6ae"/>
+  <!-- Cab -->
+  <path d="M290 222 L290 330 L424 330 L424 268 L386 222 Z" fill="white"/>
+  <!-- Ventana cab -->
+  <path d="M300 232 L300 284 L378 284 L378 258 L358 232 Z" fill="#fbe8c0"/>
+  <!-- Ruedas -->
+  <circle cx="128" cy="354" r="42" fill="#3a2e1e"/>
+  <circle cx="128" cy="354" r="22" fill="#c2b18a"/>
+  <circle cx="128" cy="354" r="8" fill="#3a2e1e"/>
+  <circle cx="370" cy="354" r="42" fill="#3a2e1e"/>
+  <circle cx="370" cy="354" r="22" fill="#c2b18a"/>
+  <circle cx="370" cy="354" r="8" fill="#3a2e1e"/>
+  <!-- Chasis -->
+  <rect x="58" y="326" width="366" height="14" rx="6" fill="#e8d6ae"/>
+  <!-- Parrilla cab -->
+  <rect x="408" y="290" width="16" height="40" rx="4" fill="#e8d6ae"/>
+</svg>

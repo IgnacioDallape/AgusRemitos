@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo completo (maskable necesita padding extra) -->
+  <rect width="512" height="512" fill="#af9e78"/>
+  <!-- Trailer -->
+  <rect x="76" y="192" width="210" height="138" rx="14" fill="white"/>
+  <rect x="76" y="228" width="210" height="5" rx="2" fill="#e8d6ae"/>
+  <rect x="76" y="262" width="210" height="5" rx="2" fill="#e8d6ae"/>
+  <rect x="76" y="296" width="210" height="5" rx="2" fill="#e8d6ae"/>
+  <!-- Cab -->
+  <path d="M286 230 L286 330 L416 330 L416 272 L380 230 Z" fill="white"/>
+  <path d="M296 240 L296 286 L372 286 L372 264 L354 240 Z" fill="#fbe8c0"/>
+  <!-- Ruedas -->
+  <circle cx="136" cy="352" r="38" fill="#3a2e1e"/>
+  <circle cx="136" cy="352" r="20" fill="#c2b18a"/>
+  <circle cx="136" cy="352" r="7" fill="#3a2e1e"/>
+  <circle cx="362" cy="352" r="38" fill="#3a2e1e"/>
+  <circle cx="362" cy="352" r="20" fill="#c2b18a"/>
+  <circle cx="362" cy="352" r="7" fill="#3a2e1e"/>
+  <!-- Chasis -->
+  <rect x="76" y="326" width="340" height="12" rx="5" fill="#e8d6ae"/>
+</svg>

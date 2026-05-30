@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de íconos PNG</title>
+  <style>
+    body { font-family: sans-serif; padding: 30px; background: #fbe8c0; }
+    h2 { color: #3a2e1e; }
+    button {
+      background: #af9e78; color: white; border: none;
+      padding: 14px 28px; font-size: 16px; border-radius: 8px;
+      cursor: pointer; margin: 8px 4px;
+    }
+    button:hover { background: #8a7d5e; }
+    canvas { display: none; }
+    #estado { margin-top: 16px; color: #3a2e1e; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Generador de íconos PWA — RemitosApp</h2>
+  <p>Hacé click en el botón para descargar los dos PNGs necesarios.</p>
+  <button onclick="generarTodos()">⬇️ Descargar icon-192.png y icon-512.png</button>
+  <div id="estado"></div>
+  <canvas id="c"></canvas>
+
+  <script>
+    const svgSrc = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="96" fill="#af9e78"/>
+      <rect x="58" y="178" width="232" height="152" rx="16" fill="white"/>
+      <rect x="58" y="218" width="232" height="6" rx="3" fill="#e8d6ae"/>
+      <rect x="58" y="258" width="232" height="6" rx="3" fill="#e8d6ae"/>
+      <rect x="58" y="298" width="232" height="6" rx="3" fill="#e8d6ae"/>
+      <path d="M290 222 L290 330 L424 330 L424 268 L386 222 Z" fill="white"/>
+      <path d="M300 232 L300 284 L378 284 L378 258 L358 232 Z" fill="#fbe8c0"/>
+      <circle cx="128" cy="354" r="42" fill="#3a2e1e"/>
+      <circle cx="128" cy="354" r="22" fill="#c2b18a"/>
+      <circle cx="128" cy="354" r="8" fill="#3a2e1e"/>
+      <circle cx="370" cy="354" r="42" fill="#3a2e1e"/>
+      <circle cx="370" cy="354" r="22" fill="#c2b18a"/>
+      <circle cx="370" cy="354" r="8" fill="#3a2e1e"/>
+      <rect x="58" y="326" width="366" height="14" rx="6" fill="#e8d6ae"/>
+      <rect x="408" y="290" width="16" height="40" rx="4" fill="#e8d6ae"/>
+    </svg>`;
+
+    function generarPNG(size, nombre) {
+      return new Promise(resolve => {
+        const canvas = document.getElementById('c');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        const blob = new Blob([svgSrc], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const img = new Image();
+        img.onload = () => {
+          ctx.clearRect(0, 0, size, size);
+          ctx.drawImage(img, 0, 0, size, size);
+          URL.revokeObjectURL(url);
+          canvas.toBlob(pngBlob => {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(pngBlob);
+            a.download = nombre;
+            a.click();
+            resolve();
+          }, 'image/png');
+        };
+        img.src = url;
+      });
+    }
+
+    async function generarTodos() {
+      document.getElementById('estado').textContent = 'Generando...';
+      await generarPNG(192, 'icon-192.png');
+      await new Promise(r => setTimeout(r, 500));
+      await generarPNG(512, 'icon-512.png');
+      document.getElementById('estado').textContent = '✅ Listo! Mové los dos PNG a esta carpeta (icons/) y recargá.';
+    }
+  </script>
+</body>
+</html>
